@@ -5,27 +5,25 @@ import TrackingView from './src/TrackingView'
 import ControlPane from './src/ControlPane'
 
 import { MQTT_BROKER_HOST, MQTT_BROKER_WS_PORT, MQTT_TOPIC_TRACKING } from 'react-native-dotenv'
-
+import mqtt from 'mqtt/dist/mqtt'
 
 
 export default class App extends React.Component {
   constructor(props) {
     super(props)
-    var mqtt = require('mqtt/dist/mqtt')
+    // Kết nối đến MQTT Broker
     var mqttClient = mqtt.connect(MQTT_BROKER_HOST, {port: MQTT_BROKER_WS_PORT})
 
 
     mqttClient.on('connect', () => {
-      this.setState({text: 'Connected'})
-      mqttClient.subscribe(MQTT_TOPIC_TRACKING, (err) => {
-        if (err) {
-          console.log('Error: ', err)
-        }
-      })
+      this.setState({text: 'Connectedd'})
+      // Đăng ký topic Tracking
+      mqttClient.subscribe(MQTT_TOPIC_TRACKING)
     })
     
     mqttClient.on('message', (topic, message) => {
       let data = JSON.parse(message)
+      // Lưu dữ liệu vị trí nhận được vào state
       switch (topic){
         case MQTT_TOPIC_TRACKING:
           if (data.coordinate) {
@@ -33,25 +31,12 @@ export default class App extends React.Component {
               text: data.toString(),
               coordinate: data.coordinate
             })
-          } else {
-            console.log('Unexpected Coordinate!')
           }
           break;
         default:
           break;
       }
     })
-
-    this.state = {
-      text: 'Hello',
-      mqttClient: mqttClient
-    }
-  }
-  componentDidMount() {
-    console.log("MOUNT")
-  }
-  componentWillUnmount() {
-    console.log("UNMOUNT")
   }
   
   render() {
@@ -60,7 +45,8 @@ export default class App extends React.Component {
           <TrackingView 
             style={styles.trackingView}
             text={this.state.text}
-            coordinate={this.state.coordinate}
+            // Truyền dữ liệu vào thành phần con
+            coordinate={this.state.coordinate} 
           />
           <ControlPane 
             style={styles.controlPane}
