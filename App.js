@@ -11,24 +11,20 @@ import mqtt from 'mqtt/dist/mqtt'
 export default class App extends React.Component {
   constructor(props) {
     super(props)
-    // Kết nối đến MQTT Broker
     var mqttClient = mqtt.connect(MQTT_BROKER_HOST, {port: MQTT_BROKER_WS_PORT})
 
 
     mqttClient.on('connect', () => {
-      this.setState({text: 'Connectedd'})
-      // Đăng ký topic Tracking
+      this.setState({mqttStatus: 'Connected'})
       mqttClient.subscribe(MQTT_TOPIC_TRACKING)
     })
     
     mqttClient.on('message', (topic, message) => {
       let data = JSON.parse(message)
-      // Lưu dữ liệu vị trí nhận được vào state
       switch (topic){
         case MQTT_TOPIC_TRACKING:
           if (data.coordinate) {
             this.setState({
-              text: data.toString(),
               coordinate: data.coordinate
             })
           }
@@ -37,6 +33,10 @@ export default class App extends React.Component {
           break;
       }
     })
+
+    this.state = {
+      mqttClient: mqttClient
+    }
   }
   
   render() {
@@ -44,8 +44,7 @@ export default class App extends React.Component {
       <View style={styles.container}>
           <TrackingView 
             style={styles.trackingView}
-            text={this.state.text}
-            // Truyền dữ liệu vào thành phần con
+            text="Hello"
             coordinate={this.state.coordinate} 
           />
           <ControlPane 

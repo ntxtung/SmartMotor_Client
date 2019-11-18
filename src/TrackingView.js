@@ -20,20 +20,21 @@ export default class TrackingView extends React.Component {
         longitudeDelta: 0.0421,
       },
       marker: {
-        title: 'Motorbike Here',
-        description: "Here the motorbike"
+        title: 'Your stuff Here'
       }
     }
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.coordinate != this.props.coordinate) {
+      let {longitude, latitude} = this.props.coordinate
       let region = {
         ...this.state.region,
-        latitude: this.props.coordinate.latitude,
-        longitude: this.props.coordinate.longitude
+        latitude: latitude,
+        longitude: longitude
       }
-      this.setState({region})
+      let coorText = 'Longitude: ' + longitude + ' - Latitude: ' + latitude
+      this.setState({region, coorText})
     }
   }
 
@@ -50,7 +51,7 @@ export default class TrackingView extends React.Component {
         <Marker
           coordinate={this.props.coordinate ? this.props.coordinate : this.state.trackMotorbike.coordinate}
           title={this.state.marker.title}
-          description={this.props.text}
+          description={this.state.coorText}
         />
       </MapView>
     )
