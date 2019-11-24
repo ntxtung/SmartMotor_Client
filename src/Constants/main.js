@@ -1,0 +1,9 @@
+export const NEED_ABOUT          = false
+export const LANG_ABOUT_APP      = 'Tracking App'
+export const LANG_ABOUT_AUTHOR   = 'Tùng Nguyễn'
+export const LANG_CONNECTED      = 'Connected'
+export const LANG_DISCONNECTED   = 'Not Connected'
+export const LANG_ALARM_BTN1     = 'Alarm 1'
+export const LANG_ALARM_BTN2     = 'Alarm 2'
+export const LANG_FIND_BTN1      = 'Find 1'
+export const LANG_FIND_BTN2      = 'Find 2'

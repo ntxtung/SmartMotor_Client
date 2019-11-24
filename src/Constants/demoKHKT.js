@@ -1,0 +1,9 @@
+export const NEED_ABOUT          = true
+export const LANG_ABOUT_APP      = 'QUẢN LÝ XE MÁY'
+export const LANG_ABOUT_AUTHOR   = 'CAO GIA MINH'
+export const LANG_CONNECTED      = 'ĐÃ KẾT NỐI'
+export const LANG_DISCONNECTED   = 'MẤT KẾT NỐI'
+export const LANG_ALARM_BTN1     = 'Báo động 1'
+export const LANG_ALARM_BTN2     = 'Báo động 2'
+export const LANG_FIND_BTN1      = 'Tìm kiếm 1'
+export const LANG_FIND_BTN2      = 'Tìm kiếm 2'
