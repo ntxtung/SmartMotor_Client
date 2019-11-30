@@ -1,5 +1,5 @@
 export const NEED_ABOUT          = true
-export const LANG_ABOUT_APP      = 'QUẢN LÝ XE MÁY'
+export const LANG_ABOUT_APP      = 'ĐỊNH VỊ ĐỒ VẬT'
 export const LANG_ABOUT_AUTHOR   = 'CAO GIA MINH'
 export const LANG_CONNECTED      = 'ĐÃ KẾT NỐI'
 export const LANG_DISCONNECTED   = 'MẤT KẾT NỐI'

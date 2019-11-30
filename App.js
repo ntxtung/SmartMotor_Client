@@ -46,14 +46,14 @@ export default class App extends React.Component {
             switch (topic) {
                 case MQTT_TOPIC_TRACKING_D01:
                     if (data.lat && data.lon) {
-                        let newDeviceData01 = { ...this.state.deviceData01, latitude: data.lat, longitude: data.lon }
+                        let newDeviceData01 = { ...this.state.deviceData01, latitude: data.lat, longitude: data.lon, ...data}
                         this.setState({ deviceData01: newDeviceData01 })
                         console.log("D01: ", newDeviceData01)
                     }
                     break;
                 case MQTT_TOPIC_TRACKING_D02:
                     if (data.lat && data.lon) {
-                        let newDeviceData02 = { ...this.state.deviceData02, latitude: data.lat, longitude: data.lon }
+                        let newDeviceData02 = { ...this.state.deviceData02, latitude: data.lat, longitude: data.lon, ...data}
                         this.setState({ deviceData02: newDeviceData02 })
                         console.log("D02: ", newDeviceData02)
                     }
