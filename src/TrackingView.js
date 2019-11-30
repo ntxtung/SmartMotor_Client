@@ -3,8 +3,10 @@ import { StyleSheet, View, Text } from 'react-native';
 
 import MapView, { Marker, Callout } from 'react-native-maps';
 
-const DEFAULT_LATITUDE = 11.906930
-const DEFAULT_LONGITUDE = 109.146176
+import {LANG_LATITUDE, LANG_LONGITUDE, LANG_BATTERY, LANG_SAT_TRACKED, LANG_SAT_TOTAL, 
+        DEFAULT_LATITUDE, DEFAULT_LONGITUDE, 
+        LANG_DEVICE_01, LANG_DEVICE_02} from './Constants'
+
 
 export default class TrackingView extends React.Component {
   constructor(props) {
@@ -17,12 +19,12 @@ export default class TrackingView extends React.Component {
         longitudeDelta: 0.0421,
       },
       deviceData01: {
-        name: "Device 01",
+        name: LANG_DEVICE_01,
         latitude: DEFAULT_LATITUDE,
         longitude: DEFAULT_LONGITUDE
       },
       deviceData02: {
-        name: "Device 02",
+        name: LANG_DEVICE_02,
         latitude: DEFAULT_LATITUDE,
         longitude: DEFAULT_LONGITUDE
       }
@@ -60,12 +62,12 @@ export default class TrackingView extends React.Component {
         >
           <Callout>
             <View>
-              <Text style={{fontWeight: 'bold'}}>Device 01</Text>
-              <Text>Latitude: {this.state.deviceData01.latitude || ''}</Text>
-              <Text>Longitude: {this.state.deviceData01.longitude || ''}</Text>
-              <Text>Battery: {this.state.deviceData01.batt || '?'}</Text>
-              <Text>Satelites Tracked: {this.state.deviceData01.satelitesTracked || 0}</Text>
-              <Text>Gps Sates Total: {this.state.deviceData01.gpsSatesTotal || 0}</Text>
+              <Text style={{fontWeight: 'bold'}}>{this.state.deviceData01.name}</Text>
+              <Text>{LANG_LATITUDE}: {this.state.deviceData01.latitude || ''}</Text>
+              <Text>{LANG_LONGITUDE}: {this.state.deviceData01.longitude || ''}</Text>
+              <Text>{LANG_BATTERY}: {this.state.deviceData01.batt || '?'}</Text>
+              {/* <Text>{LANG_SAT_TRACKED}: {this.state.deviceData01.satelitesTracked || 0}</Text>
+              <Text>{LANG_SAT_TOTAL}: {this.state.deviceData01.gpsSatesTotal || 0}</Text> */}
             </View>
           </Callout>
         </Marker>
@@ -75,12 +77,12 @@ export default class TrackingView extends React.Component {
         >
           <Callout>
             <View>
-              <Text style={{fontWeight: 'bold'}}>Device 02</Text>
-              <Text>Latitude: {this.state.deviceData02.latitude || ''}</Text>
-              <Text>Longitude: {this.state.deviceData02.longitude || ''}</Text>
-              <Text>Battery: {this.state.deviceData02.batt || '?'}</Text>
-              <Text>Satelites Tracked: {this.state.deviceData02.satelitesTracked || 0}</Text>
-              <Text>Gps Sates Total: {this.state.deviceData02.gpsSatesTotal || 0}</Text>
+              <Text style={{fontWeight: 'bold'}}>{this.state.deviceData02.name}</Text>
+              <Text>{LANG_LATITUDE}: {this.state.deviceData02.latitude || ''}</Text>
+              <Text>{LANG_LONGITUDE}: {this.state.deviceData02.longitude || ''}</Text>
+              <Text>{LANG_BATTERY}: {this.state.deviceData02.batt || '?'}</Text>
+              {/* <Text>{LANG_SAT_TRACKED}: {this.state.deviceData02.satelitesTracked || 0}</Text>
+              <Text>{LANG_SAT_TOTAL}: {this.state.deviceData02.gpsSatesTotal || 0}</Text> */}
             </View>
           </Callout>
         </Marker>
