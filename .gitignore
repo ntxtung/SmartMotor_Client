@@ -1,4 +1,5 @@
 Release/
+*.apk
 # OSX
 #
 .DS_Store
