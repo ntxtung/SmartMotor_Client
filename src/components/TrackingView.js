@@ -5,7 +5,7 @@ import MapView, { Marker, Callout } from 'react-native-maps';
 
 import {LANG_LATITUDE, LANG_LONGITUDE, LANG_BATTERY, LANG_SAT_TRACKED, LANG_SAT_TOTAL, 
         DEFAULT_LATITUDE, DEFAULT_LONGITUDE, 
-        LANG_DEVICE_01, LANG_DEVICE_02} from './Constants'
+        LANG_DEVICE_01, LANG_DEVICE_02} from '../constants'
 
 
 export default class TrackingView extends React.Component {
@@ -46,16 +46,12 @@ export default class TrackingView extends React.Component {
     }
   }
 
-  onRegionChange = (region) => {
-    this.setState({ region: region })
-  }
-
   render() {
     return (
       <MapView
         style={styles.mapViewStyle}
         region={this.state.region}
-        onRegionChangeComplete={this.onRegionChange}
+        onRegionChangeComplete={(region) => this.setState({region})}
       > 
         <Marker
           coordinate={this.state.deviceData01}

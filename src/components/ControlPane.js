@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, TouchableOpacity , Text } from 'react-native';
 
-import { MQTT_TOPIC_ALARM_D01, MQTT_TOPIC_ALARM_D02, LANG_ALARM_BTN1, LANG_ALARM_BTN2, LANG_FIND_BTN1, LANG_FIND_BTN2 } from './Constants'
+import { MQTT_TOPIC_ALARM_D01, MQTT_TOPIC_ALARM_D02, LANG_ALARM_BTN1, LANG_ALARM_BTN2, LANG_FIND_BTN1, LANG_FIND_BTN2 } from '../constants'
 
 export default class ControlPane extends React.Component {
   onAlarm1 = () => {

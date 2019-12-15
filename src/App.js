@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-import TrackingView from './src/TrackingView'
-import ControlPane from './src/ControlPane'
+import TrackingView from './components/TrackingView'
+import ControlPane from './components/ControlPane'
 
-import { NEED_ABOUT, LANG_ABOUT_APP, LANG_ABOUT_AUTHOR, LANG_CONNECTED, LANG_DISCONNECTED, MQTT_BROKER_HOST, MQTT_TOPIC_TRACKING_D01, MQTT_TOPIC_TRACKING_D02 } from './src/Constants'
+import { NEED_ABOUT, LANG_ABOUT_APP, LANG_ABOUT_AUTHOR, LANG_CONNECTED, LANG_DISCONNECTED, MQTT_BROKER_HOST, MQTT_TOPIC_TRACKING_D01, MQTT_TOPIC_TRACKING_D02 } from './constants'
 
 import mqtt from 'mqtt/dist/mqtt'
 
