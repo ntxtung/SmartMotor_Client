@@ -2,13 +2,15 @@ import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 
 import MapView, { Marker, Callout } from 'react-native-maps';
+import {connect} from 'react-redux'
 
 import {LANG_LATITUDE, LANG_LONGITUDE, LANG_BATTERY, LANG_SAT_TRACKED, LANG_SAT_TOTAL, 
         DEFAULT_LATITUDE, DEFAULT_LONGITUDE, 
         LANG_DEVICE_01, LANG_DEVICE_02} from '../constants'
 
+import {changeRegion} from '../actions'
 
-export default class TrackingView extends React.Component {
+class TrackingView extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -50,8 +52,8 @@ export default class TrackingView extends React.Component {
     return (
       <MapView
         style={styles.mapViewStyle}
-        region={this.state.region}
-        onRegionChangeComplete={(region) => this.setState({region})}
+        region={this.props.region}
+        onRegionChangeComplete={(region) => this.props.changeRegion(region)}
       > 
         <Marker
           coordinate={this.state.deviceData01}
@@ -62,8 +64,8 @@ export default class TrackingView extends React.Component {
               <Text>{LANG_LATITUDE}: {this.state.deviceData01.latitude || ''}</Text>
               <Text>{LANG_LONGITUDE}: {this.state.deviceData01.longitude || ''}</Text>
               <Text>{LANG_BATTERY}: {this.state.deviceData01.batt || '?'}</Text>
-              {/* <Text>{LANG_SAT_TRACKED}: {this.state.deviceData01.satelitesTracked || 0}</Text>
-              <Text>{LANG_SAT_TOTAL}: {this.state.deviceData01.gpsSatesTotal || 0}</Text> */}
+              <Text>{LANG_SAT_TRACKED}: {this.state.deviceData01.satelitesTracked || 0}</Text>
+              <Text>{LANG_SAT_TOTAL}: {this.state.deviceData01.gpsSatesTotal || 0}</Text>
             </View>
           </Callout>
         </Marker>
@@ -77,8 +79,8 @@ export default class TrackingView extends React.Component {
               <Text>{LANG_LATITUDE}: {this.state.deviceData02.latitude || ''}</Text>
               <Text>{LANG_LONGITUDE}: {this.state.deviceData02.longitude || ''}</Text>
               <Text>{LANG_BATTERY}: {this.state.deviceData02.batt || '?'}</Text>
-              {/* <Text>{LANG_SAT_TRACKED}: {this.state.deviceData02.satelitesTracked || 0}</Text>
-              <Text>{LANG_SAT_TOTAL}: {this.state.deviceData02.gpsSatesTotal || 0}</Text> */}
+              <Text>{LANG_SAT_TRACKED}: {this.state.deviceData02.satelitesTracked || 0}</Text>
+              <Text>{LANG_SAT_TOTAL}: {this.state.deviceData02.gpsSatesTotal || 0}</Text>
             </View>
           </Callout>
         </Marker>
@@ -93,3 +95,9 @@ const styles = StyleSheet.create({
     // height: 500
   }
 });
+
+const mapStateToProps = (state) => {
+  return {region: state.mapViewReducer.region};
+}
+
+export default connect(mapStateToProps, {changeRegion})(TrackingView)

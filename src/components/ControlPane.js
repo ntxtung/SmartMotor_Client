@@ -1,37 +1,28 @@
 import React from 'react';
 import { StyleSheet, View, TouchableOpacity , Text } from 'react-native';
+import {connect} from 'react-redux'
 
 import { MQTT_TOPIC_ALARM_D01, MQTT_TOPIC_ALARM_D02, LANG_ALARM_BTN1, LANG_ALARM_BTN2, LANG_FIND_BTN1, LANG_FIND_BTN2 } from '../constants'
 
-export default class ControlPane extends React.Component {
+import {changeRegion} from '../actions'
+
+class ControlPane extends React.Component {
   onAlarm1 = () => {
-    if (this.props.mqttClient) {
-      this.props.mqttClient.publish(MQTT_TOPIC_ALARM_D01, '1')
-    }
-  }
-  onAlarm2 = () => {
-    if (this.props.mqttClient) {
-      this.props.mqttClient.publish(MQTT_TOPIC_ALARM_D02, '1')
-    }
-  }
-  onFind1 = () => {
-    if (this.props.moveRegionTo) {
-      this.props.moveRegionTo('D1')
-    }
-  }
-  
-  onFind2 = () => {
-    if (this.props.moveRegionTo) {
-      this.props.moveRegionTo('D2')
-    }
+
   }
 
+  onFind1 = () => {
+
+  }
+
+
   render() {
-    const statusColor = this.props.mqttStatus.code === 1 ? 'green' : 'red'
+    // const statusColor = this.props.mqttStatus.code === 1 ? 'green' : 'red'
+    const statusColor = 'yellow'
     return (
         <View style={styles.controlContainer}>
           <View style={{...styles.statusGroup, backgroundColor: statusColor}}>
-            <Text style={styles.fullButtonText}>{this.props.mqttStatus.text}</Text>
+            <Text style={styles.fullButtonText}>On Maintaining</Text>
           </View>
 
           <View style={styles.buttonControlGroup}>
@@ -41,25 +32,6 @@ export default class ControlPane extends React.Component {
               >
                 <Text style={styles.fullButtonText}>
                   {LANG_FIND_BTN1}
-                </Text>
-            </TouchableOpacity>
-            <TouchableOpacity 
-              style={styles.fullWidthButton}
-              onPress={this.onFind2}
-              >
-                <Text style={styles.fullButtonText}>
-                  {LANG_FIND_BTN2}
-                </Text>
-            </TouchableOpacity>
-          </View>
-
-          <View style={styles.buttonControlGroup}>
-            <TouchableOpacity 
-              style={styles.fullWidthButton}
-              onPress={this.onAlarm1}
-              >
-                <Text style={styles.fullButtonText}>
-                  {LANG_ALARM_BTN1}
                 </Text>
             </TouchableOpacity>
             <TouchableOpacity 
@@ -105,3 +77,11 @@ let styles = StyleSheet.create({
     fontWeight: 'bold'
   }
 });
+
+const mapStateToProps = (state) => {
+  return {
+    // region: state.mapViewReducer.region
+  };
+}
+
+export default connect(mapStateToProps, {changeRegion})(ControlPane)

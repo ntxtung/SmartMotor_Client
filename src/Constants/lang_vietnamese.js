@@ -1,6 +1,3 @@
-export const NEED_ABOUT          = true
-export const LANG_ABOUT_APP      = 'ĐỊNH VỊ ĐỒ VẬT'
-export const LANG_ABOUT_AUTHOR   = 'CAO GIA MINH'
 export const LANG_CONNECTED      = 'ĐÃ KẾT NỐI'
 export const LANG_DISCONNECTED   = 'MẤT KẾT NỐI'
 export const LANG_ALARM_BTN1     = 'Báo động 1'
