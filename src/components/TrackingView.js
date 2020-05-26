@@ -29,7 +29,6 @@ class TrackingView extends React.Component {
   }
 
   render() {
-    console.log("Did udpate:",this.props.region)
     const coordinate = {
       latitude: this.props.device ? this.props.device.lat : this.state.initCoor.lat,
       longitude: this.props.device ? this.props.device.lon : this.state.initCoor.lon

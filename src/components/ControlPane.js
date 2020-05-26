@@ -7,7 +7,9 @@ import {
   LANG_DISCONNECTED,
   LANG_ALARM_BTN,
   LANG_FIND_BTN,
-  MQTT_TOPIC_ALARM
+  LANG_LOCK_BTN,
+  MQTT_TOPIC_ALARM,
+  MQTT_TOPIC_LOCK,
 } from '../constants';
 
 import {changeRegion, mqttPublishMessage} from '../actions';
@@ -24,7 +26,9 @@ class ControlPane extends React.Component {
     this.props.changeRegion(region)
   }
 
-  onLockTrigger = () => {}
+  onLockTrigger = () => {
+    this.props.mqttPublishMessage(MQTT_TOPIC_LOCK, null)
+  }
 
   render() {
     const mqttStatus =
@@ -51,8 +55,8 @@ class ControlPane extends React.Component {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.fullWidthButton}
-            onPress={this.onBuzz}>
-            <Text style={styles.fullButtonText}>{LANG_ALARM_BTN}</Text>
+            onPress={this.onLockTrigger}>
+            <Text style={styles.fullButtonText}>{LANG_LOCK_BTN}</Text>
           </TouchableOpacity>
         </View>
       </View>
