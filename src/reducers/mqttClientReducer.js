@@ -13,9 +13,9 @@ import mqtt from 'mqtt/dist/mqtt';
 import {store} from '../store'
 
 const initialState = null;
-
+let client = null;
 const createClient = () => {
-    const client = mqtt.connect(MQTT_BROKER_HOST);
+    client = mqtt.connect(MQTT_BROKER_HOST);
 
     client.on('connect', function(connack) {
         store.dispatch(mqttConnectionState(true));
@@ -65,6 +65,10 @@ const mqttClientReducer = (state = initialState, action) => {
                 ...state,
                 message: action.payload.message,
             };
+        }
+        case 'PUBLISH_MESSAGE': {
+            client.publish(action.payload.topic, action.payload.message)
+            return state;
         }
         // Default
         default: {

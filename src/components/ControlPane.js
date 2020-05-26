@@ -7,12 +7,15 @@ import {
   LANG_DISCONNECTED,
   LANG_ALARM_BTN,
   LANG_FIND_BTN,
+  MQTT_TOPIC_ALARM
 } from '../constants';
 
-import {changeRegion} from '../actions';
+import {changeRegion, mqttPublishMessage} from '../actions';
 
 class ControlPane extends React.Component {
-  onBuzz = () => {}
+  onBuzz = () => {
+    this.props.mqttPublishMessage(MQTT_TOPIC_ALARM, null)
+  }
 
   onCenter = () => {
     let region = {...this.props.region}
@@ -99,5 +102,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  {changeRegion},
+  {changeRegion, mqttPublishMessage},
 )(ControlPane);

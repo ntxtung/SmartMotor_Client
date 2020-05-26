@@ -43,3 +43,12 @@ export const mqttOnMessage = (topic, message) => {
     return updateMotorbike(message)
   } 
 };
+
+export const mqttPublishMessage = (topic, message) => {
+  return {
+    type: 'PUBLISH_MESSAGE',
+    payload :{
+      topic, message
+    }
+  }
+}
