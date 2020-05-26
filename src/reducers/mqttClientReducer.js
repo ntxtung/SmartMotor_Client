@@ -1,7 +1,7 @@
 import {
     MQTT_BROKER_HOST,
-    MQTT_TOPIC_TRACKING_D01,
-    MQTT_TOPIC_ALARM_D01,
+    MQTT_TOPIC_TRACKING,
+    MQTT_TOPIC_ALARM,
 } from '../constants';
 import {
     mqttConnectionState,
@@ -20,11 +20,11 @@ const createClient = () => {
     client.on('connect', function(connack) {
         store.dispatch(mqttConnectionState(true));
 
-        client.subscribe(MQTT_TOPIC_TRACKING_D01, err => {
+        client.subscribe(MQTT_TOPIC_TRACKING, err => {
             if (err) {
                 alert(err);
             }
-            store.dispatch(mqttConnectionSubscribe(MQTT_TOPIC_TRACKING_D01));
+            store.dispatch(mqttConnectionSubscribe(MQTT_TOPIC_TRACKING));
         });
     });
 
@@ -44,14 +44,14 @@ const mqttClientReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'INIT_CONNECTION': {
             return {
-            ...state,
-            client: createClient(),
+                ...state,
+                client: createClient(),
             };
         }
         case 'MQTT_CONNECTION': {
             return {
-            ...state,
-            status: action.payload,
+                ...state,
+                status: action.payload,
             };
         }
         case 'DO_SUBSCRIBE': {
@@ -61,10 +61,9 @@ const mqttClientReducer = (state = initialState, action) => {
             // --- NEED IMPLEMENTED ---
         }
         case 'ON_MESSAGE': {
-            console.log(action.payload);
             return {
-            ...state,
-            message: action.payload.message,
+                ...state,
+                message: action.payload.message,
             };
         }
         // Default

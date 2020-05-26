@@ -1,9 +1,8 @@
 import React from 'react';
-import mqtt from 'mqtt/dist/mqtt'
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import {connect} from 'react-redux'
 
-import { NEED_ABOUT, LANG_ABOUT_APP, LANG_ABOUT_AUTHOR, LANG_CONNECTED, LANG_DISCONNECTED, MQTT_BROKER_HOST, MQTT_TOPIC_TRACKING_D01, MQTT_TOPIC_TRACKING_D02 } from './constants'
+import { LANG_CONNECTED, LANG_DISCONNECTED } from './constants'
 
 import TrackingView from './components/TrackingView'
 import ControlPane from './components/ControlPane'
@@ -56,7 +55,7 @@ const styles = StyleSheet.create({
         // backgroundColor: 'blue'
     },
     controlPane: {
-        flex: 2,
+        flex: 1,
         // backgroundColor: 'transparent',
     }
 });
