@@ -93,7 +93,7 @@ let styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => {
-  if (state.mqttClientReducer != null) {
+  if (state.mqttClientReducer) {
     return {
       mqttStatus: state.mqttClientReducer.status,
       device: state.motorbikeReducer.device,

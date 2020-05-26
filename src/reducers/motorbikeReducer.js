@@ -1,4 +1,11 @@
-const initialState = null
+import { DEFAULT_LATITUDE, DEFAULT_LONGITUDE } from '../constants'
+
+const initialState = {
+    device: {
+        lat: DEFAULT_LATITUDE,
+        lon: DEFAULT_LONGITUDE
+    }
+}
 
 const motorbikeReducer = (state = initialState, action) => {
     switch (action.type) {

@@ -33,12 +33,10 @@ class TrackingView extends React.Component {
       latitude: this.props.device ? this.props.device.lat : this.state.initCoor.lat,
       longitude: this.props.device ? this.props.device.lon : this.state.initCoor.lon
     }
-    return (
-      <MapView
-        style={styles.mapViewStyle}
-        region={this.props.region}
-        onRegionChangeComplete={region => this.props.changeRegion(region)}>
-        <Marker coordinate={coordinate}>
+    let marker;
+    if (this.props.device) {
+      marker = 
+      <Marker coordinate={coordinate}>
           <Callout>
             <View>
               <Text style={{fontWeight: 'bold'}}>
@@ -63,6 +61,13 @@ class TrackingView extends React.Component {
             </View>
           </Callout>
         </Marker>
+    }
+    return (
+      <MapView
+        style={styles.mapViewStyle}
+        region={this.props.region}
+        onRegionChangeComplete={region => this.props.changeRegion(region)}>
+        {marker}
       </MapView>
     );
   }
@@ -76,10 +81,14 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => {
-  return {
-    region: state.mapViewReducer.region,
-    device: state.motorbikeReducer.device
-  };
+  if (state.motorbikeReducer && state.mapViewReducer) {
+    return {
+      region: state.mapViewReducer.region,
+      device: state.motorbikeReducer.device
+    };
+  } else {
+    return {}
+  }
 };
 
 export default connect(
