@@ -20,6 +20,7 @@ const mapViewReducer = (state = initialState, action) => {
                 }
             }
         }
+
         // Default
         default: {
             return state;

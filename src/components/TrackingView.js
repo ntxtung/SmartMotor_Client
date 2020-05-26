@@ -21,12 +21,6 @@ class TrackingView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      region: {
-        latitude: DEFAULT_LATITUDE,
-        longitude: DEFAULT_LONGITUDE,
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421,
-      },
       initCoor: {
         lat: DEFAULT_LATITUDE,
         lon: DEFAULT_LONGITUDE
@@ -34,17 +28,8 @@ class TrackingView extends React.Component {
     };
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.region && prevProps.region !== this.props.region) {
-      let {latitude, longitude} = this.props.region;
-      if (latitude && longitude) {
-        this.setState({region: {...this.state.region, latitude, longitude}});
-      }
-    }
-  }
-  
-
   render() {
+    console.log("Did udpate:",this.props.region)
     const coordinate = {
       latitude: this.props.device ? this.props.device.lat : this.state.initCoor.lat,
       longitude: this.props.device ? this.props.device.lon : this.state.initCoor.lon

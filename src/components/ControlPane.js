@@ -5,7 +5,6 @@ import {connect} from 'react-redux';
 import {
   LANG_CONNECTED,
   LANG_DISCONNECTED,
-  MQTT_TOPIC_ALARM,
   LANG_ALARM_BTN,
   LANG_FIND_BTN,
 } from '../constants';
@@ -13,9 +12,16 @@ import {
 import {changeRegion} from '../actions';
 
 class ControlPane extends React.Component {
-  onAlarm1 = () => {};
+  onBuzz = () => {}
 
-  onFind1 = () => {};
+  onCenter = () => {
+    let region = {...this.props.region}
+    region.latitude = this.props.device.lat
+    region.longitude = this.props.device.lon
+    this.props.changeRegion(region)
+  }
+
+  onLockTrigger = () => {}
 
   render() {
     const mqttStatus =
@@ -32,12 +38,17 @@ class ControlPane extends React.Component {
         <View style={styles.buttonControlGroup}>
           <TouchableOpacity
             style={styles.fullWidthButton}
-            onPress={this.onFind1}>
+            onPress={this.onCenter}>
             <Text style={styles.fullButtonText}>{LANG_FIND_BTN}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.fullWidthButton}
-            onPress={this.onAlarm2}>
+            onPress={this.onBuzz}>
+            <Text style={styles.fullButtonText}>{LANG_ALARM_BTN}</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.fullWidthButton}
+            onPress={this.onBuzz}>
             <Text style={styles.fullButtonText}>{LANG_ALARM_BTN}</Text>
           </TouchableOpacity>
         </View>
@@ -77,8 +88,9 @@ let styles = StyleSheet.create({
 const mapStateToProps = state => {
   if (state.mqttClientReducer != null) {
     return {
-      //  region: state.mapViewReducer.region
       mqttStatus: state.mqttClientReducer.status,
+      device: state.motorbikeReducer.device,
+      region: state.mapViewReducer.region,
     };
   } else {
     return {};
