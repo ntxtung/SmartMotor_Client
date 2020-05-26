@@ -22,14 +22,6 @@ class App extends React.Component {
     componentWillUnmount() {
     }
 
-    setMqttStatus(status) {
-        if (status === true) {
-            this.setState({ mqttStatus: { text: LANG_CONNECTED, code: 1 } })
-        } else {
-            this.setState({ mqttStatus: { text: LANG_DISCONNECTED, code: 0 } })
-        }
-    }
-
     render() {
         return (
             <View style={styles.container}>

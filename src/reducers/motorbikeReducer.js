@@ -1,7 +1,6 @@
 const initialState = null
 
 const motorbikeReducer = (state = initialState, action) => {
-    console.log("Action: ", action)
     switch (action.type) {
         case 'ADD_MOTORBIKE': {
             let newState = state
@@ -17,7 +16,6 @@ const motorbikeReducer = (state = initialState, action) => {
                 ...state,
                 device: newData
             }
-
         }
         // Default
         default: {

@@ -27,20 +27,14 @@ class TrackingView extends React.Component {
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421,
       },
-      deviceData01: {
-        name: LANG_DEVICE_NAME,
-        latitude: DEFAULT_LATITUDE,
-        longitude: DEFAULT_LONGITUDE,
-      },
+      initCoor: {
+        lat: DEFAULT_LATITUDE,
+        lon: DEFAULT_LONGITUDE
+      }
     };
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.deviceData01 != this.props.deviceData01) {
-      this.setState({
-        deviceData01: {...this.state.deviceData01, ...this.props.deviceData01},
-      });
-    }
     if (this.props.region && prevProps.region !== this.props.region) {
       let {latitude, longitude} = this.props.region;
       if (latitude && longitude) {
@@ -48,34 +42,39 @@ class TrackingView extends React.Component {
       }
     }
   }
+  
 
   render() {
+    const coordinate = {
+      latitude: this.props.device ? this.props.device.lat : this.state.initCoor.lat,
+      longitude: this.props.device ? this.props.device.lon : this.state.initCoor.lon
+    }
     return (
       <MapView
         style={styles.mapViewStyle}
         region={this.props.region}
         onRegionChangeComplete={region => this.props.changeRegion(region)}>
-        <Marker coordinate={this.state.deviceData01}>
+        <Marker coordinate={coordinate}>
           <Callout>
             <View>
               <Text style={{fontWeight: 'bold'}}>
-                {this.state.deviceData01.name}
+                {LANG_DEVICE_NAME}
               </Text>
               <Text>
-                {LANG_LATITUDE}: {this.state.deviceData01.latitude || ''}
+                {LANG_LATITUDE}: {this.props.device.lat || ''}
               </Text>
               <Text>
-                {LANG_LONGITUDE}: {this.state.deviceData01.longitude || ''}
+                {LANG_LONGITUDE}: {this.props.device.lon || ''}
               </Text>
               <Text>
-                {LANG_BATTERY}: {this.state.deviceData01.batt || '?'}
+                {LANG_BATTERY}: {this.props.device.batt || '?'}
               </Text>
               <Text>
                 {LANG_SAT_TRACKED}:{' '}
-                {this.state.deviceData01.satelitesTracked || 0}
+                {this.props.device.satelitesTracked || 0}
               </Text>
               <Text>
-                {LANG_SAT_TOTAL}: {this.state.deviceData01.gpsSatesTotal || 0}
+                {LANG_SAT_TOTAL}: {this.props.device.gpsSatesTotal || 0}
               </Text>
             </View>
           </Callout>
@@ -94,7 +93,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return {
-    region: state.mapViewReducer.region
+    region: state.mapViewReducer.region,
+    device: state.motorbikeReducer.device
   };
 };
 
