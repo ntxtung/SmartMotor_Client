@@ -6147,7 +6147,6 @@ react-native-elements@^2.0.0:
 
 "react-native-maps@git+https://git@github.com/react-native-community/react-native-maps.git":
   version "0.27.1"
-  uid ea999354dd2e8a0d418296d7b5138137900187de
   resolved "git+https://git@github.com/react-native-community/react-native-maps.git#ea999354dd2e8a0d418296d7b5138137900187de"
   dependencies:
     "@types/geojson" "^7946.0.7"
@@ -6566,13 +6565,6 @@ rimraf@~2.2.6:
   version "2.2.8"
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.2.8.tgz#e439be2aaee327321952730f99a8929e4fc50582"
   integrity sha1-5Dm+Kq7jJzIZUnMPmaiSnk/FBYI=
-
-rn-swipeable-panel@^1.0.27:
-  version "1.0.27"
-  resolved "https://registry.yarnpkg.com/rn-swipeable-panel/-/rn-swipeable-panel-1.0.27.tgz#8eb13ee09ca9a4a9ee94e344fedfdf259505939f"
-  integrity sha512-JLDTe6SbLeCLsIdvZNB/MsQsjuXyBdR76x4s0C/kV0zohi9najMPgbMDzeOfC4HQR2UadYKohpu4NCJwi2ZNYg==
-  dependencies:
-    prop-types "^15.7.2"
 
 rsvp@^4.8.4:
   version "4.8.5"

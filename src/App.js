@@ -43,11 +43,11 @@ const styles = StyleSheet.create({
         flexDirection: 'column'
     },
     trackingView: {
-        flex: 10,
+        flex: 1,
         // backgroundColor: 'blue'
     },
     controlPane: {
-        flex: 1,
+        flex: 0,
         // backgroundColor: 'transparent',
     }
 });

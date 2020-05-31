@@ -1,7 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, TouchableOpacity, Text} from 'react-native';
 import {connect} from 'react-redux';
-import SwipeablePanel from "rn-swipeable-panel";
 
 import {
   LANG_CONNECTED,
@@ -16,8 +15,8 @@ import {
 import {changeRegion, mqttPublishMessage} from '../actions';
 
 class ControlPane extends React.Component {
-  
-    onBuzz = () => {
+   
+  onBuzz = () => {
     this.props.mqttPublishMessage(MQTT_TOPIC_ALARM, null)
   }
 
