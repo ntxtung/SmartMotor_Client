@@ -55,10 +55,10 @@ const mqttClientReducer = (state = initialState, action) => {
             };
         }
         case 'DO_SUBSCRIBE': {
-            // --- NEED IMPLEMENTED ---
+            // !! NEED IMPLEMENTED 
         }
         case 'DO_UNSUBSCRIBE': {
-            // --- NEED IMPLEMENTED ---
+            // !! NEED IMPLEMENTED
         }
         case 'ON_MESSAGE': {
             return {
