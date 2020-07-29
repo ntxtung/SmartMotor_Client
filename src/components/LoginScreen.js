@@ -31,11 +31,22 @@ class LoginScreen extends React.Component {
             this.setState({loading: false})
             const {data: {login: {token}}} = response
             if (token) {
-                this.props.setAuthentication({
-                    id: '',
-                    username: this.state.username,
-                    token: token
-                })
+                this.props.gqlClient.query({
+                    query: gql `
+                    query GetUserByUsername {
+                        userByUsername(input: "${this.state.username}") {
+                            _id
+                        }
+                    } 
+                    `
+                }).then(response2 => {
+                    console.log(response2)
+                    this.props.setAuthentication({
+                        id: response2.data.userByUsername._id,
+                        username: this.state.username,
+                        token: token
+                    })
+                }) 
             } 
         }).catch(() => {
             this.setState({loading: false})

@@ -31,14 +31,6 @@ class App extends React.Component {
         if (this.props.loggedUsername) {
             if (this.props.chosedDeviceId) {
                 return (
-                    // <View style={styles.container}>
-                    //     <View style={styles.trackingView}>
-                    //         <TrackingView/>
-                    //     </View>
-                    //     <View style={styles.controlPane}>
-                    //         <ControlPane/>
-                    //     </View>
-                    // </View>
                     <MotorbikeManageScreen />
                 )
             } else {
@@ -69,14 +61,6 @@ const styles = StyleSheet.create({
         paddingLeft: "10%",
         paddingRight: "10%"
     },  
-    trackingView: {
-        flex: 9,
-        // backgroundColor: 'blue'
-    },
-    controlPane: {
-        flex: 1,
-        // backgroundColor: 'transparent',
-    }
 });
 
 const mapStateToProps = state => {
