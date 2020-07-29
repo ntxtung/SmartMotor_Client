@@ -28,7 +28,6 @@ class LoginScreen extends React.Component {
             }
             `
         }).then((response, err) => {
-            console.log(err)
             this.setState({loading: false})
             const {data: {login: {token}}} = response
             if (token) {

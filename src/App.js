@@ -26,19 +26,24 @@ class App extends React.Component {
     }
 
     render() {
-        return (
-            <View style={styles.loginContainer}>
-                <LoginScreen />
-            </View>
-            // <View style={styles.container}>
-            //     <View style={styles.trackingView}>
-            //         <TrackingView/>
-            //     </View>
-            //     <View style={styles.controlPane}>
-            //         <ControlPane/>
-            //     </View>
-            // </View>
-        )
+        if (this.props.loggedUsername) {
+            return (
+                <View style={styles.container}>
+                    <View style={styles.trackingView}>
+                        <TrackingView/>
+                    </View>
+                    <View style={styles.controlPane}>
+                        <ControlPane/>
+                    </View>
+                </View>
+            )
+        } else {
+            return (
+                <View style={styles.loginContainer}>
+                    <LoginScreen />
+                </View>
+            )
+        }
     }
 }
 
@@ -65,4 +70,11 @@ const styles = StyleSheet.create({
     }
 });
 
-export default connect(null, { mqttConnectionInit, graphqlConnectionInit })(App)
+const mapStateToProps = state => {
+    const {authReducer: {username}} = state
+    return {
+        loggedUsername: username
+    };
+};
+
+export default connect(mapStateToProps, { mqttConnectionInit, graphqlConnectionInit })(App)
