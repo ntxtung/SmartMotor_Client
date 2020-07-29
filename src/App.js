@@ -8,6 +8,7 @@ import TrackingView from './components/TrackingView'
 import ControlPane from './components/ControlPane'
 import LoginScreen from './components/LoginScreen'
 import DeviceManagerScreen from "./components/DeviceManagerScreen";
+import MotorbikeManageScreen from "./components/MotorbikeManageScreen";
 
 import { mqttConnectionInit, graphqlConnectionInit } from './actions'
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
@@ -30,14 +31,15 @@ class App extends React.Component {
         if (this.props.loggedUsername) {
             if (this.props.chosedDeviceId) {
                 return (
-                    <View style={styles.container}>
-                        <View style={styles.trackingView}>
-                            <TrackingView/>
-                        </View>
-                        <View style={styles.controlPane}>
-                            <ControlPane/>
-                        </View>
-                    </View>
+                    // <View style={styles.container}>
+                    //     <View style={styles.trackingView}>
+                    //         <TrackingView/>
+                    //     </View>
+                    //     <View style={styles.controlPane}>
+                    //         <ControlPane/>
+                    //     </View>
+                    // </View>
+                    <MotorbikeManageScreen />
                 )
             } else {
                 return (

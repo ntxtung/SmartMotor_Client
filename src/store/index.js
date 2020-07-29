@@ -19,7 +19,8 @@ const persistConfig = {
     blacklist: [
       'mqttClientReducer',
       'graphqlClientReducer',
-      'authReducer'
+      'deviceManageReducer',      
+      'authReducer',
     ],
 };
 // Middleware: Redux Persist Persisted Reducer
