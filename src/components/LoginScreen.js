@@ -1,10 +1,10 @@
 import React from 'react';
-import {StyleSheet, View, TouchableOpacity, Text} from 'react-native';
+import { Alert } from 'react-native';
 import { Input, Button } from 'react-native-elements';
 import {connect} from 'react-redux';
 import {gql} from '@apollo/client'
 
-import { } from '../actions';
+import { setAuthentication } from '../actions';
 
 
 class LoginScreen extends React.Component {
@@ -18,7 +18,6 @@ class LoginScreen extends React.Component {
     }
 
     onSubmitPressed = () => {
-        console.log(`Username: ${this.state.username}\nPassword: ${this.state.password}`)
         this.setState({loading: true})
         this.props.gqlClient.mutate({
             mutation: gql `
@@ -28,10 +27,38 @@ class LoginScreen extends React.Component {
                 }
             }
             `
-        }).then(response => {
+        }).then((response, err) => {
+            console.log(err)
             this.setState({loading: false})
-            console.log("RESP:",response)
+            const {data: {login: {token}}} = response
+            if (token) {
+                this.props.setAuthentication({
+                    id: '',
+                    username: this.state.username,
+                    token: token
+                })
+            } 
+        }).catch(() => {
+            this.setState({loading: false})
+            Alert.alert(
+                "Login Failed",
+                "Wrong username or password",
+                [
+                    {
+                        text: "Cancel",
+                        style: "cancel"
+                    },
+                    {
+                        text: "Clear",
+                        onPress: () => this.setState({username: '', password: ''})
+                    }
+                ],
+                {
+                    cancelable: false
+                }
+            )
         })
+        
     }
 
     onUsernameChanged = (value) => {
@@ -59,6 +86,7 @@ class LoginScreen extends React.Component {
                 <Button
                     onPress={this.onSubmitPressed}
                     loading={this.state.loading}
+                    disabled={this.state.loading}
                     title="Login"
                 />
             </>
@@ -76,4 +104,4 @@ const mapStateToProps = state => {
     }
   };
 
-export default connect(mapStateToProps, null)(LoginScreen);
+export default connect(mapStateToProps, {setAuthentication})(LoginScreen);
