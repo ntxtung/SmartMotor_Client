@@ -20,7 +20,7 @@ const persistConfig = {
       'mqttClientReducer',
       'graphqlClientReducer',
       'deviceManageReducer',      
-      'authReducer',
+      // 'authReducer',
     ],
 };
 // Middleware: Redux Persist Persisted Reducer

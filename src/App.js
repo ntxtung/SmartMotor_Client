@@ -34,9 +34,17 @@ class App extends React.Component {
                     <MotorbikeManageScreen />
                 )
             } else {
-                return (
-                    <DeviceManagerScreen style={styles.container}/>
-                )
+                if (this.props.gqlClient) {
+                    return (
+                        <DeviceManagerScreen 
+                            // style={styles.container}
+                        />
+                    )
+                } else {
+                    return (
+                        <></>
+                    )
+                }
             }
         } else {
             return (
@@ -64,10 +72,11 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => {
-    const {authReducer: {username}, deviceManageReducer: {clientId}} = state
+    const {authReducer: {username}, deviceManageReducer: {clientId}, graphqlClientReducer: {gqlClient}} = state
     return {
         loggedUsername: username,
-        chosedDeviceId: clientId
+        chosedDeviceId: clientId,
+        gqlClient: gqlClient
     };
 };
 
