@@ -66,7 +66,10 @@ class TrackingView extends React.Component {
       <MapView
         style={styles.mapViewStyle}
         region={this.props.region}
-        onRegionChangeComplete={region => this.props.changeRegion(region)}>
+        onRegionChangeComplete={region => this.props.changeRegion(region)}
+        // ref={ref => {this.mapRef = ref;}}
+        >
+        
         {marker}
       </MapView>
     );
