@@ -6,8 +6,10 @@ import { LANG_CONNECTED, LANG_DISCONNECTED } from './constants'
 
 import TrackingView from './components/TrackingView'
 import ControlPane from './components/ControlPane'
+import LoginScreen from './components/LoginScreen'
 
-import { mqttConnectionInit } from './actions'
+import { mqttConnectionInit, graphqlConnectionInit } from './actions'
+import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
 
 
 class App extends React.Component {
@@ -17,6 +19,7 @@ class App extends React.Component {
 
     componentDidMount() {
         this.props.mqttConnectionInit()
+        this.props.graphqlConnectionInit()
     }
 
     componentWillUnmount() {
@@ -24,14 +27,17 @@ class App extends React.Component {
 
     render() {
         return (
-            <View style={styles.container}>
-                <View style={styles.trackingView}>
-                    <TrackingView/>
-                </View>
-                <View style={styles.controlPane}>
-                    <ControlPane/>
-                </View>
+            <View style={styles.loginContainer}>
+                <LoginScreen />
             </View>
+            // <View style={styles.container}>
+            //     <View style={styles.trackingView}>
+            //         <TrackingView/>
+            //     </View>
+            //     <View style={styles.controlPane}>
+            //         <ControlPane/>
+            //     </View>
+            // </View>
         )
     }
 }
@@ -42,6 +48,13 @@ const styles = StyleSheet.create({
         // justifyContent: 'center',
         flexDirection: 'column'
     },
+    loginContainer: {
+        flex: 1,
+        flexDirection: "column",
+        justifyContent: "center",
+        paddingLeft: "10%",
+        paddingRight: "10%"
+    },  
     trackingView: {
         flex: 9,
         // backgroundColor: 'blue'
@@ -52,4 +65,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default connect(null, { mqttConnectionInit })(App)
+export default connect(null, { mqttConnectionInit, graphqlConnectionInit })(App)

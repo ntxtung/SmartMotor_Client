@@ -4,12 +4,14 @@ import { combineReducers } from 'redux';
 import mapViewReducer from './mapViewReducer'
 import mqttClientReducer from './mqttClientReducer'
 import motorbikeReducer from './motorbikeReducer'
+import graphqlClientReducer from "./graphqlClientReducer";
 
 // Redux: Root Reducer
 const rootReducer = combineReducers({
     mapViewReducer,
     mqttClientReducer,
-    motorbikeReducer
+    motorbikeReducer,
+    graphqlClientReducer
 });
 // Exports
 export default rootReducer;

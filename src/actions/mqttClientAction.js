@@ -43,7 +43,6 @@ export const mqttOnMessage = (topic, message) => {
   // if (topic.match(new RegExp('smartmotor/.*/tracking'))) {
   //   return updateMotorbike(message)
   // } 
-  console.log()
   if (topic === MQTT_TOPIC_TRACKING) {
     return updateMotorbike(message)
   } 
