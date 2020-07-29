@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, View, Text, BackHandler} from 'react-native';
 
 import MapView, {Marker, Callout} from 'react-native-maps';
 import {connect} from 'react-redux';
@@ -15,7 +15,7 @@ import {
   LANG_DEVICE_NAME,
 } from '../constants';
 
-import {changeRegion} from '../actions';
+import {changeRegion, setChosedDevice} from '../actions';
 
 class TrackingView extends React.Component {
   constructor(props) {
@@ -26,6 +26,21 @@ class TrackingView extends React.Component {
         lon: DEFAULT_LONGITUDE
       }
     };
+  }
+
+  backAction = () => {
+    this.props.setChosedDevice()
+  }
+
+  componentDidMount() {
+    this.backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      this.backAction
+    )
+  }
+
+  componentWillUnmount() {
+    this.backHandler.remove();
   }
 
   render() {
@@ -96,5 +111,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  {changeRegion},
+  {changeRegion, setChosedDevice},
 )(TrackingView);

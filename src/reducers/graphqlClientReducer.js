@@ -2,7 +2,9 @@ import { ApolloClient, InMemoryCache } from '@apollo/client';
 import { GRAPHQL_HOST } from '../constants'
 
 import {store} from '../store'
-const initialState = null;
+const initialState = {
+    gqlClient: null
+};
 
 const createGqlClient = () => {
     const client = new ApolloClient({

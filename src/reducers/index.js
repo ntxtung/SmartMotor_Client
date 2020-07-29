@@ -6,6 +6,7 @@ import mqttClientReducer from './mqttClientReducer'
 import motorbikeReducer from './motorbikeReducer'
 import graphqlClientReducer from "./graphqlClientReducer";
 import authReducer from './authReducer'
+import deviceManageReducer from './deviceManageReducer'
 
 // Redux: Root Reducer
 const rootReducer = combineReducers({
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
     mqttClientReducer,
     motorbikeReducer,
     graphqlClientReducer,
-    authReducer
+    authReducer,
+    deviceManageReducer
 });
 // Exports
 export default rootReducer;

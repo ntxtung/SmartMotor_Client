@@ -94,13 +94,10 @@ class LoginScreen extends React.Component {
 }
 
 const mapStateToProps = state => {
-    if (state.graphqlClientReducer) {
-      return {
-        gqlClient: state.graphqlClientReducer.gqlClient
-      };
-    } else {
-      return {};
+    const {graphqlClientReducer: {gqlClient}} = state
+    return {
+        gqlClient: gqlClient
     }
-  };
+};
 
 export default connect(mapStateToProps, {setAuthentication})(LoginScreen);
