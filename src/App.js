@@ -38,16 +38,16 @@ class App extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flex: 10,
         // justifyContent: 'center',
         flexDirection: 'column'
     },
     trackingView: {
-        flex: 1,
+        flex: 9,
         // backgroundColor: 'blue'
     },
     controlPane: {
-        flex: 0,
+        flex: 1,
         // backgroundColor: 'transparent',
     }
 });
