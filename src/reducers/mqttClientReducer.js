@@ -20,12 +20,12 @@ const createClient = () => {
     client.on('connect', function(connack) {
         store.dispatch(mqttConnectionState(true));
 
-        client.subscribe(MQTT_TOPIC_TRACKING, err => {
-            if (err) {
-                alert(err);
-            }
-            store.dispatch(mqttConnectionSubscribe(MQTT_TOPIC_TRACKING));
-        });
+        // client.subscribe(MQTT_TOPIC_TRACKING, err => {
+        //     if (err) {
+        //         alert(err);
+        //     }
+        //     store.dispatch(mqttConnectionSubscribe(MQTT_TOPIC_TRACKING));
+        // });
     });
 
     client.on('message', (topic, message) => {
@@ -56,6 +56,11 @@ const mqttClientReducer = (state = initialState, action) => {
         }
         case 'DO_SUBSCRIBE': {
             // !! NEED IMPLEMENTED 
+            console.log("TOPIC: ",action.payload)
+            client.subscribe(action.payload)
+            return {
+                ...state
+            };
         }
         case 'DO_UNSUBSCRIBE': {
             // !! NEED IMPLEMENTED

@@ -40,10 +40,7 @@ export const mqttConnectionState = (status = null) => {
 }
 
 export const mqttOnMessage = (topic, message) => {
-  // if (topic.match(new RegExp('smartmotor/.*/tracking'))) {
-  //   return updateMotorbike(message)
-  // } 
-  if (topic === MQTT_TOPIC_TRACKING) {
+  if (topic.match(new RegExp(MQTT_TOPIC_TRACKING + '/*'))) {
     return updateMotorbike(message)
   } 
   return {

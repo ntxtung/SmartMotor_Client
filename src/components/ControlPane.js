@@ -17,7 +17,7 @@ import {changeRegion, mqttPublishMessage} from '../actions';
 class ControlPane extends React.Component {
    
   onBuzz = () => {
-    this.props.mqttPublishMessage(MQTT_TOPIC_ALARM, null)
+    this.props.mqttPublishMessage(MQTT_TOPIC_ALARM + this.props.chosedDevice.deviceNumber, '1')
   }
 
   onCenter = () => {
@@ -28,7 +28,7 @@ class ControlPane extends React.Component {
   }
 
   onLockTrigger = () => {
-    this.props.mqttPublishMessage(MQTT_TOPIC_LOCK, null)
+    this.props.mqttPublishMessage(MQTT_TOPIC_LOCK + this.props.chosedDevice.deviceNumber, '0')
   }
 
   render() {
@@ -94,11 +94,13 @@ let styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => {
+  const {deviceManageReducer} = state
   if (state.mqttClientReducer) {
     return {
       mqttStatus: state.mqttClientReducer.status,
       device: state.motorbikeReducer.device,
       region: state.mapViewReducer.region,
+      chosedDevice: deviceManageReducer
     };
   } else {
     return {};

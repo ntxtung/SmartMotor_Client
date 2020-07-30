@@ -4,10 +4,14 @@ import { Header, Button } from 'react-native-elements';
 import {connect} from 'react-redux';
 import {gql} from '@apollo/client'
 
-import { setChosedDevice } from '../actions';
+import { setChosedDevice, mqttConnectionSubscribe } from '../actions';
 
 import TrackingView from './TrackingView'
 import ControlPane from './ControlPane'
+
+import {
+    MQTT_TOPIC_TRACKING
+  } from '../constants';
 
 class MotorbikeManageScreen extends React.Component {
     constructor(props) {
@@ -18,10 +22,11 @@ class MotorbikeManageScreen extends React.Component {
     }
     
     componentDidMount() {
-    this.backHandler = BackHandler.addEventListener(
-        "hardwareBackPress",
-        this.backAction
-    )
+        this.props.mqttConnectionSubscribe(MQTT_TOPIC_TRACKING + this.props.chosedDevice.deviceNumber)
+        this.backHandler = BackHandler.addEventListener(
+            "hardwareBackPress",
+            this.backAction
+        )
     }
     
       componentWillUnmount() {
@@ -78,4 +83,4 @@ const mapStateToProps = state => {
     }
 };
 
-export default connect(mapStateToProps, {setChosedDevice})(MotorbikeManageScreen);
+export default connect(mapStateToProps, {setChosedDevice, mqttConnectionSubscribe})(MotorbikeManageScreen);
