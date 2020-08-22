@@ -15,6 +15,12 @@ import {
 import {changeRegion, mqttPublishMessage} from '../actions';
 
 class ControlPane extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      controlDisabled: true
+    }
+  }
    
   onBuzz = () => {
     this.props.mqttPublishMessage(MQTT_TOPIC_ALARM + this.props.chosedDevice.deviceNumber, '1')
@@ -31,6 +37,16 @@ class ControlPane extends React.Component {
     this.props.mqttPublishMessage(MQTT_TOPIC_LOCK + this.props.chosedDevice.deviceNumber, '0')
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props !== prevProps) {
+      if (this.props.device == null) {
+        this.setState({controlDisabled: true}) 
+      } else {
+        this.setState({controlDisabled: false})
+      }
+    }
+  }
+
   render() {
     const mqttStatus =
       this.props.mqttStatus && this.props.mqttStatus.code === 1
@@ -45,16 +61,19 @@ class ControlPane extends React.Component {
 
         <View style={styles.buttonControlGroup}>
           <TouchableOpacity
+            disabled={this.state.controlDisabled}
             style={styles.fullWidthButton}
             onPress={this.onCenter}>
             <Text style={styles.fullButtonText}>{LANG_FIND_BTN}</Text>
           </TouchableOpacity>
           <TouchableOpacity
+            disabled={this.state.controlDisabled}
             style={styles.fullWidthButton}
             onPress={this.onBuzz}>
             <Text style={styles.fullButtonText}>{LANG_ALARM_BTN}</Text>
           </TouchableOpacity>
           <TouchableOpacity
+            disabled={this.state.controlDisabled}
             style={styles.fullWidthButton}
             onPress={this.onLockTrigger}>
             <Text style={styles.fullButtonText}>{LANG_LOCK_BTN}</Text>

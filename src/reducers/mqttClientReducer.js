@@ -55,7 +55,6 @@ const mqttClientReducer = (state = initialState, action) => {
             };
         }
         case 'DO_SUBSCRIBE': {
-            // !! NEED IMPLEMENTED 
             console.log("TOPIC: ",action.payload)
             client.subscribe(action.payload)
             return {
@@ -63,7 +62,11 @@ const mqttClientReducer = (state = initialState, action) => {
             };
         }
         case 'DO_UNSUBSCRIBE': {
-            // !! NEED IMPLEMENTED
+            console.log("TOPIC: ",action.payload)
+            client.unsubscribe(action.payload)
+            return {
+                ...state
+            };
         }
         case 'ON_MESSAGE': {
             return {

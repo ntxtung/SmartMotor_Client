@@ -141,6 +141,7 @@ class DeviceManagerScreen extends React.Component {
                             value={this.state.deviceNumber}
                         />
                         <Button
+                            buttonStyle={{backgroundColor: '#141414'}}
                             onPress={this.onAddDevicePressed}
                             loading={this.state.loading}
                             disabled={this.state.loading}
@@ -148,6 +149,7 @@ class DeviceManagerScreen extends React.Component {
                         />
                         <Button
                             onPress={() => this.setState({isAddVisible: false})}
+                            titleStyle={{color: '#141414'}}
                             title="Cancel"
                             type='clear'
                         />

@@ -4,7 +4,7 @@ import { Header, Button, Icon } from 'react-native-elements';
 import {connect} from 'react-redux';
 import {gql} from '@apollo/client'
 
-import { setChosedDevice, mqttConnectionSubscribe } from '../actions';
+import { setChosedDevice, mqttConnectionSubscribe, mqttConnectionUnsubscribe } from '../actions';
 
 import TrackingView from './TrackingView'
 import ControlPane from './ControlPane'
@@ -17,15 +17,17 @@ class MotorbikeManageScreen extends React.Component {
     constructor(props) {
         super(props)
     }
-    backAction = () => {
+    backAction = async () => {
+        let {deviceNumber} = this.props.chosedDevice
+        await this.props.mqttConnectionUnsubscribe(MQTT_TOPIC_TRACKING + deviceNumber)
         this.props.setChosedDevice(null)
     }
     
     componentDidMount() {
         this.props.mqttConnectionSubscribe(MQTT_TOPIC_TRACKING + this.props.chosedDevice.deviceNumber)
-
     }
     
+
     render() {
         console.log(this.props.chosedDevice)
         const {plateNumber} = this.props.chosedDevice
@@ -36,6 +38,7 @@ class MotorbikeManageScreen extends React.Component {
                     containerStyle={styles.header}
                     leftComponent={<Icon name='home' color='white' onPress={this.backAction} />}
                     centerComponent={{ text: plateNumber, style: { color: '#fff', fontWeight:'bold' } }}
+                    rightComponent={<Icon name='schedule' color='white' />}
                 />
                 <View style={styles.trackingView}>
                     <TrackingView/>
@@ -79,4 +82,4 @@ const mapStateToProps = state => {
     }
 };
 
-export default connect(mapStateToProps, {setChosedDevice, mqttConnectionSubscribe})(MotorbikeManageScreen);
+export default connect(mapStateToProps, {setChosedDevice, mqttConnectionSubscribe, mqttConnectionUnsubscribe})(MotorbikeManageScreen);
