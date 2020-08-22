@@ -97,6 +97,7 @@ class LoginScreen extends React.Component {
                     onPress={this.onSubmitPressed}
                     loading={this.state.loading}
                     disabled={this.state.loading}
+                    buttonStyle={{backgroundColor: '#141414'}}
                     title="Login"
                 />
             </>

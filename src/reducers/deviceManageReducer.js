@@ -14,6 +14,10 @@ const deviceManageReducer = (state = initialState, action) => {
                     ...state,
                     clientId, deviceNumber, plateNumber, _id
                 }
+            } else {
+                return {
+                    ...initialState
+                }
             }
         }
 

@@ -1,6 +1,7 @@
 export * from './lang_english'
 
-export const MQTT_BROKER_HOST        = 'ws://167.71.194.83:8080'
+// export const MQTT_BROKER_HOST        = 'ws://167.71.194.83:8080'
+export const MQTT_BROKER_HOST        = 'ws://206.189.90.18:8080'
 export const MQTT_TOPIC_TRACKING     = 'smartmotor/track/'
 export const MQTT_TOPIC_ALARM        = 'smartmotor/control/'
 export const MQTT_TOPIC_LOCK         = 'smartmotor/control/'

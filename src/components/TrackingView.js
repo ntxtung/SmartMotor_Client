@@ -39,9 +39,6 @@ class TrackingView extends React.Component {
       <Marker coordinate={coordinate}>
           <Callout>
             <View>
-              <Text style={{fontWeight: 'bold'}}>
-                {LANG_DEVICE_NAME}
-              </Text>
               <Text>
                 {LANG_LATITUDE}: {this.props.device.lat || ''}
               </Text>

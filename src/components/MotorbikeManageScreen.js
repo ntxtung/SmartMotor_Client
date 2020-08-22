@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, BackHandler } from 'react-native';
-import { Header, Button } from 'react-native-elements';
+import { Header, Button, Icon } from 'react-native-elements';
 import {connect} from 'react-redux';
 import {gql} from '@apollo/client'
 
@@ -18,20 +18,14 @@ class MotorbikeManageScreen extends React.Component {
         super(props)
     }
     backAction = () => {
-        this.props.setChosedDevice()
+        this.props.setChosedDevice(null)
     }
     
     componentDidMount() {
         this.props.mqttConnectionSubscribe(MQTT_TOPIC_TRACKING + this.props.chosedDevice.deviceNumber)
-        this.backHandler = BackHandler.addEventListener(
-            "hardwareBackPress",
-            this.backAction
-        )
+
     }
     
-      componentWillUnmount() {
-        this.backHandler.remove();
-      }
     render() {
         console.log(this.props.chosedDevice)
         const {plateNumber} = this.props.chosedDevice
@@ -40,6 +34,7 @@ class MotorbikeManageScreen extends React.Component {
                 <Header 
                     statusBarProps={{ translucent: true }}
                     containerStyle={styles.header}
+                    leftComponent={<Icon name='home' color='white' onPress={this.backAction} />}
                     centerComponent={{ text: plateNumber, style: { color: '#fff', fontWeight:'bold' } }}
                 />
                 <View style={styles.trackingView}>
@@ -61,10 +56,11 @@ const styles = StyleSheet.create({
         flexDirection: 'column'
     },
     header: {
-        flex: 1,
-        paddingTop: 10,
-        paddingBottom: 0,
+        // flex: 1,
+        // paddingTop: 10,
+        // paddingBottom: 0,
         // height: 10
+        backgroundColor: '#141414'
     },
     trackingView: {
         flex: 8,

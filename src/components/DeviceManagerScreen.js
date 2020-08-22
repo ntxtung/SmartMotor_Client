@@ -1,6 +1,6 @@
 import React from 'react';
 import { Alert, Text, View, StyleSheet } from 'react-native';
-import { Button, Header, ListItem, Overlay, Input } from 'react-native-elements';
+import { Button, Header, ListItem, Overlay, Input, Icon } from 'react-native-elements';
 import {connect} from 'react-redux';
 import {gql} from '@apollo/client'
 
@@ -73,7 +73,6 @@ class DeviceManagerScreen extends React.Component {
                 loading: false,
                 isAddVisible: false
             })
-            console.log("ERRPR")
         })
     }
 
@@ -86,7 +85,6 @@ class DeviceManagerScreen extends React.Component {
     }
 
     onDeviceChosed = (item) => {
-        console.log("Item:", item)
         this.props.setChosedDevice(item)
     }
 
@@ -100,37 +98,32 @@ class DeviceManagerScreen extends React.Component {
                 bottomDivider
             />
         ))
-        console.log(this.state.deviceList)
         return (
             <>
                 <View style={styles.container}>
                     <Header
-                        style={styles.header}
+                        containerStyle={styles.header}
                         centerComponent={{ text: 'MOTORBIKE E-MANAGEMENT', style: { color: '#fff' } }}
+                        
                     />
                     <View style={styles.listPane}>
                         {deviceListRender}
                     </View>
                     <View style={styles.controlPane}>
                         <View style={styles.controlPaneRow}>
-                            <View
-                                style={styles.logOutBtn}
-                            >
-                                <Button 
-                                    onPress={this.onLogoutPressed}
-                                    title="Log Out"
+                            <Button 
+                                onPress={this.onLogoutPressed}
+                                title="Log Out"
+                                containerStyle={styles.logOutBtn}
+                                buttonStyle={{backgroundColor: '#141414'}}
                                 />
-                            </View>
-                            <View
-                                style={styles.addBtn}
-                            >
-                                <Button 
-                                    style={styles.addBtn}
-                                    title="Add"
-                                    type="outline"
-                                    onPress={() => this.setState({isAddVisible: true})}
-                                />
-                            </View>
+                            <Button 
+                                title="Add"
+                                containerStyle={styles.addBtn}
+                                titleStyle={{color: '#141414'}}
+                                type="outline"
+                                onPress={() => this.setState({isAddVisible: true})}
+                            />
                         </View>
                     </View>
                 </View>
@@ -173,7 +166,8 @@ const styles = StyleSheet.create({
         alignItems: 'stretch',
     },
     header: {
-        flex: 1
+        // flex: 1
+        backgroundColor: '#141414'
     },
     listPane: {
         flex: 8,
@@ -192,6 +186,7 @@ const styles = StyleSheet.create({
     },
     logOutBtn: {
         flex: 7,
+        backgroundColor: '#141414'
     },
     addBtn: {
         flex: 2,
