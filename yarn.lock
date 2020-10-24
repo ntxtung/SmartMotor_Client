@@ -6147,8 +6147,8 @@ react-native-elements@^2.0.0:
 
 "react-native-maps@git+https://git@github.com/react-native-community/react-native-maps.git":
   version "0.27.1"
-  uid ea999354dd2e8a0d418296d7b5138137900187de
-  resolved "git+https://git@github.com/react-native-community/react-native-maps.git#ea999354dd2e8a0d418296d7b5138137900187de"
+  uid "1f47e5bbcb7b24f21e11108e73af19e17eaf84ff"
+  resolved "git+https://git@github.com/react-native-community/react-native-maps.git#1f47e5bbcb7b24f21e11108e73af19e17eaf84ff"
   dependencies:
     "@types/geojson" "^7946.0.7"
 
